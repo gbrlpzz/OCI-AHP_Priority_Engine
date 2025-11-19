@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { 
@@ -285,6 +285,13 @@ function App() {
   const [state, setState] = useState<OCIState>(INITIAL_STATE);
   const [currentStep, setCurrentStep] = useState<Step>(Step.DEFINE);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [showMethodologyHint, setShowMethodologyHint] = useState(false);
+
+  // Show hint once on mount
+  useEffect(() => {
+     const timer = setTimeout(() => setShowMethodologyHint(true), 1500);
+     return () => clearTimeout(timer);
+  }, []);
 
   // --- Actions ---
 
@@ -647,13 +654,45 @@ function App() {
              <span className="hidden lg:block text-[10px] font-mono text-swiss-muted tracking-[0.2em] uppercase bg-swiss-gray/30 px-2 py-1 border border-swiss-border mt-1">// OCI-AHP ENGINE</span>
           </div>
           
-          <div className="flex gap-4 items-center h-full">
-              <button 
-                onClick={() => setView('METHODOLOGY')}
-                className={`text-[10px] font-mono font-bold uppercase tracking-widest hover:text-swiss-blue transition-colors h-full flex items-center border-b-2 ${view === 'METHODOLOGY' ? 'text-swiss-blue border-swiss-blue' : 'text-swiss-muted border-transparent hover:border-swiss-blue/30'}`}
-              >
-                Methodology
-              </button>
+          <div className="flex gap-8 items-center h-full relative">
+              <div className="relative">
+                  <button 
+                    onClick={() => { setView('METHODOLOGY'); setShowMethodologyHint(false); }}
+                    className={`
+                      px-5 py-2 font-mono text-[10px] font-bold uppercase tracking-widest border-2 transition-all duration-200
+                      ${view === 'METHODOLOGY' 
+                        ? 'border-swiss-blue text-swiss-blue' 
+                        : 'border-transparent text-swiss-muted hover:text-swiss-black hover:border-swiss-black'
+                      }
+                    `}
+                  >
+                    Methodology
+                  </button>
+
+                  {/* Onboarding Hint Popup */}
+                  {showMethodologyHint && view === 'TOOL' && (
+                     <div className="absolute top-full mt-4 right-0 w-64 bg-swiss-blue border-2 border-swiss-black text-white p-5 shadow-sharp z-50 animate-in slide-in-from-top-2 fade-in duration-300">
+                        {/* Arrow */}
+                        <div className="absolute -top-2 right-8 w-4 h-4 bg-swiss-blue border-l-2 border-t-2 border-swiss-black rotate-45"></div>
+                        
+                        <div className="relative z-10">
+                             <div className="flex justify-between items-start mb-2">
+                                <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-white/60">System Hint</span>
+                                <button onClick={() => setShowMethodologyHint(false)} className="text-white hover:text-black font-mono font-bold transition-colors">✕</button>
+                             </div>
+                             <p className="text-sm font-bold leading-tight mb-4 tracking-tight">
+                                New to the protocol? Check the decision logic before you start.
+                             </p>
+                             <button 
+                                onClick={() => { setView('METHODOLOGY'); setShowMethodologyHint(false); }}
+                                className="text-[10px] font-mono font-bold uppercase border-b-2 border-white pb-px hover:bg-white hover:text-swiss-blue transition-all"
+                             >
+                                Read Methodology &rarr;
+                             </button>
+                        </div>
+                     </div>
+                  )}
+              </div>
               
               {view === 'TOOL' && (
                   <nav aria-label="Progress" className="hidden md:flex border-2 border-swiss-black bg-white shadow-sharp ml-4">
