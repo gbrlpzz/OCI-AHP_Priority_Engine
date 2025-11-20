@@ -2,13 +2,13 @@
 
 **A structured decision-support framework integrating causal modeling with multi-criteria prioritization.**
 
-GovernanceOS is a React-based decision intelligence tool designed for public administrations and mission-driven teams. It synthesizes the **Outcome–Cause–Intervention (OCI)** causal structure with the **Analytic Hierarchy Process (AHP)** to prioritize interventions based on mathematical utility rather than intuition alone.
+GovernanceOS is a React-based decision intelligence tool designed for public administrations and mission-driven teams. It synthesizes the **Outcome–Cause–Intervention (OCI)** causal structure with the **Analytic Hierarchy Process (AHP)** to prioritize interventions.
 
 ## // Methodology
 
 The system imposes a strict three-tier ontology to ensure traceability:
 
-1.  **Outcome (Tier I)**: The singular strategic objective (e.g., "Reduce Rural Depopulation").
+1.  **Outcome (Tier I)**: The singular strategic objective.
 2.  **Drivers (Tier II)**: Probabilistic causal factors influencing the Outcome.
 3.  **Interventions (Tier III)**: Discrete operational programs mapped to specific drivers.
 
