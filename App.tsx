@@ -271,7 +271,7 @@ const DefinitionView: React.FC<{
                 type="button"
                 className="w-full md:w-auto text-xl px-16 py-8"
             >
-                INITIATE PROTOCOL
+                START ANALYSIS
             </Button>
         </div>
       </div>
@@ -650,8 +650,8 @@ function App() {
       <header className="border-b-2 border-swiss-black bg-white sticky top-0 z-50 shadow-sm no-print" role="banner">
         <div className="max-w-[1600px] mx-auto px-6 md:px-12 h-24 flex justify-between items-center">
           <div className="flex items-center gap-3 select-none cursor-pointer group" onClick={() => setView('TOOL')}>
-             <h1 className="text-3xl font-black tracking-tighter text-swiss-black group-hover:text-swiss-blue transition-colors leading-none mt-1">GOVERNANCE<span className="text-swiss-blue group-hover:text-swiss-black">_OS</span></h1>
-             <span className="hidden lg:block text-[10px] font-mono text-swiss-muted tracking-[0.2em] uppercase bg-swiss-gray/30 px-2 py-1 border border-swiss-border mt-1">// OCI-AHP ENGINE</span>
+             <h1 className="text-3xl font-black tracking-tighter text-swiss-black group-hover:text-swiss-blue transition-colors leading-none mt-1">PRIORITY<span className="text-swiss-blue group-hover:text-swiss-black">_ENGINE</span></h1>
+             <span className="hidden lg:block text-[10px] font-mono text-swiss-muted tracking-[0.2em] uppercase bg-swiss-gray/30 px-2 py-1 border border-swiss-border mt-1">// AHP-OCI PROTOCOL</span>
           </div>
           
           <div className="flex gap-8 items-center h-full relative">
@@ -788,9 +788,20 @@ function App() {
                 System Operational
             </div>
             <div className="flex items-center gap-6">
-                <span>Governance_OS // Decision Support Protocol</span>
-                <a href="mailto:info@operaincerta.com" className="hover:text-swiss-black transition-colors border-b border-transparent hover:border-swiss-black pb-px">
-                    Gabriele Pizzi
+                <span>Copyright &copy; 2025 Gabriele Pizzi // Opera Incerta</span>
+                <a 
+                    href="https://github.com/gbrlpzz/OCI-AHP_Priority_Engine" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-swiss-black transition-colors border-b border-transparent hover:border-swiss-black pb-px"
+                >
+                    GitHub
+                </a>
+                <a 
+                    href="mailto:info@operaincerta.com" 
+                    className="hover:text-swiss-black transition-colors border-b border-transparent hover:border-swiss-black pb-px"
+                >
+                    Contact
                 </a>
             </div>
         </div>

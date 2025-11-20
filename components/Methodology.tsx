@@ -207,7 +207,7 @@ export const Methodology: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 <h3 className="font-mono font-bold text-xs uppercase tracking-widest text-swiss-muted">Appendix</h3>
              </div>
              <div className="md:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-12">
-                {/* Refs */}
+                {/* Refs Column */}
                 <div className="space-y-4">
                     <h4 className="font-mono font-bold text-xs uppercase tracking-widest text-swiss-black mb-4 border-b border-swiss-black pb-1 inline-block">References</h4>
                     <ul className="space-y-4 text-xs font-mono text-swiss-muted">
@@ -218,17 +218,36 @@ export const Methodology: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     </ul>
                 </div>
 
-                {/* Contact */}
-                <div className="space-y-4">
-                    <h4 className="font-mono font-bold text-xs uppercase tracking-widest text-swiss-black mb-4 border-b border-swiss-black pb-1 inline-block">Correspondence</h4>
-                    <div className="text-xs font-mono text-swiss-muted flex flex-col gap-2">
-                        <span className="font-bold text-swiss-black">Gabriele Pizzi</span>
-                        <a 
-                            href="mailto:info@operaincerta.com" 
-                            className="hover:text-swiss-blue transition-colors hover:underline decoration-swiss-blue decoration-2 underline-offset-4"
-                        >
-                            info@operaincerta.com
-                        </a>
+                {/* Resources & Contact Column */}
+                <div className="space-y-8">
+                    {/* Repo */}
+                    <div className="space-y-4">
+                        <h4 className="font-mono font-bold text-xs uppercase tracking-widest text-swiss-black mb-4 border-b border-swiss-black pb-1 inline-block">Repository</h4>
+                        <div className="text-xs font-mono text-swiss-muted flex flex-col gap-2">
+                            <span className="font-bold text-swiss-black">Source Code</span>
+                            <a 
+                                href="https://github.com/gbrlpzz/OCI-AHP_Priority_Engine" 
+                                target="_blank"
+                                rel="noopener noreferrer" 
+                                className="hover:text-swiss-blue transition-colors hover:underline decoration-swiss-blue decoration-2 underline-offset-4"
+                            >
+                                github.com/gbrlpzz
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Contact */}
+                    <div className="space-y-4">
+                        <h4 className="font-mono font-bold text-xs uppercase tracking-widest text-swiss-black mb-4 border-b border-swiss-black pb-1 inline-block">Correspondence</h4>
+                        <div className="text-xs font-mono text-swiss-muted flex flex-col gap-2">
+                            <span className="font-bold text-swiss-black">Gabriele Pizzi</span>
+                            <a 
+                                href="mailto:info@operaincerta.com" 
+                                className="hover:text-swiss-blue transition-colors hover:underline decoration-swiss-blue decoration-2 underline-offset-4"
+                            >
+                                info@operaincerta.com
+                            </a>
+                        </div>
                     </div>
                 </div>
              </div>
@@ -241,7 +260,7 @@ export const Methodology: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             onClick={onBack} 
             className="text-xl px-16 py-8"
         >
-            INITIATE PROTOCOL &rarr;
+            START ANALYSIS &rarr;
         </Button>
       </div>
 
