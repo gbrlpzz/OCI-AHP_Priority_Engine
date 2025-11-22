@@ -476,6 +476,7 @@ function App() {
 
     return (
       <div className="space-y-16 animate-in zoom-in-95 duration-500 pb-24">
+        
         <div className="border-b-4 border-swiss-black pb-10 no-print">
             <div className="flex flex-col md:flex-row justify-between md:items-end mb-6 gap-6">
                 <div>
@@ -483,20 +484,20 @@ function App() {
                     <h2 className="text-4xl md:text-6xl font-black text-swiss-black tracking-tighter leading-none">{state.outcome}</h2>
                 </div>
                 <div className="flex gap-4">
-                    <Button variant="secondary" onClick={handleExportJson} className="hidden md:flex">EXPORT JSON</Button>
-                    <Button variant="primary" onClick={() => window.print()}>PRINT REPORT</Button>
+                    <Button variant="secondary" onClick={handleExportJson} type="button" className="hidden md:flex">EXPORT JSON</Button>
+                    <Button variant="primary" onClick={(e) => { e.preventDefault(); window.print(); }} type="button">PRINT REPORT</Button>
                 </div>
             </div>
         </div>
 
         {/* Executive Summary / Winner Ticket */}
         {winner && (
-            <div className="border-2 border-swiss-black bg-swiss-black text-white p-8 md:p-12 shadow-sharp relative overflow-hidden">
+            <div className="border-2 border-swiss-black bg-swiss-black text-white p-8 md:p-12 shadow-sharp relative overflow-hidden print:shadow-none print:border-black">
                 <div className="absolute top-0 right-0 p-4 opacity-20">
                     <div className="text-9xl font-black tracking-tighter">01</div>
                 </div>
                 <div className="relative z-10">
-                    <span className="bg-swiss-blue text-white px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-widest mb-6 inline-block">Highest Priority Intervention</span>
+                    <span className="bg-swiss-blue text-white px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-widest mb-6 inline-block print:bg-white print:text-black print:border print:border-black">Highest Priority Intervention</span>
                     <h3 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">{winner.label}</h3>
                     <div className="grid grid-cols-3 gap-8 max-w-xl mt-8 border-t border-white/20 pt-6">
                          <div>
@@ -516,10 +517,10 @@ function App() {
             </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 break-inside-avoid">
             {/* Main Chart */}
-            <div className="lg:col-span-2 border-2 border-swiss-black p-8 h-[700px] relative bg-white shadow-sharp">
-                <div className="absolute top-0 left-0 bg-swiss-black text-white px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-widest">Priority Matrix</div>
+            <div className="lg:col-span-2 border-2 border-swiss-black p-8 h-[700px] print:h-[500px] relative bg-white shadow-sharp print:shadow-none print:border-black">
+                <div className="absolute top-0 left-0 bg-swiss-black text-white px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-widest print:border print:border-black print:bg-white print:text-black">Priority Matrix</div>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={data} layout="vertical" margin={{ left: 0, right: 40, top: 40, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="0 0" stroke="#E5E5E5" horizontal={false} vertical={true} />
@@ -560,17 +561,17 @@ function App() {
 
             {/* Details Table */}
             <div className="space-y-4">
-                <div className="bg-swiss-gray/50 p-4 text-[10px] font-mono font-bold text-swiss-black uppercase tracking-widest border-2 border-swiss-black">
+                <div className="bg-swiss-gray/50 p-4 text-[10px] font-mono font-bold text-swiss-black uppercase tracking-widest border-2 border-swiss-black print:bg-white print:border-black">
                     Full Breakdown
                 </div>
                 {finalScores.map((fs, idx) => (
-                    <div key={fs.id} className="bg-white border-2 border-swiss-border p-6 transition-all group hover:border-swiss-black hover:shadow-hover">
+                    <div key={fs.id} className="bg-white border-2 border-swiss-border p-6 transition-all group hover:border-swiss-black hover:shadow-hover print:border-black print:shadow-none">
                         <div className="flex justify-between items-baseline mb-4">
                             <span className="font-bold text-swiss-black text-lg flex items-baseline gap-3 leading-none">
                                 <span className="font-mono text-swiss-muted text-xs">0{idx + 1}</span>
                                 {fs.label}
                             </span>
-                            <span className="font-mono text-swiss-blue text-xl font-bold">{(fs.baseScore / maxScore * 100).toFixed(1)}</span>
+                            <span className="font-mono text-swiss-blue text-xl font-bold print:text-black">{(fs.baseScore / maxScore * 100).toFixed(1)}</span>
                         </div>
                         
                         <div className="grid grid-cols-3 gap-4 pt-4 border-t border-swiss-border">
@@ -599,9 +600,9 @@ function App() {
         </div>
         
         {/* Network View in Results */}
-        <div className="border-t-4 border-swiss-black pt-12 avoid-break">
+        <div className="border-t-4 border-swiss-black pt-12 break-inside-avoid print:break-before-page">
              <div className="flex items-center gap-4 mb-8">
-                 <div className="w-4 h-4 bg-swiss-blue"></div>
+                 <div className="w-4 h-4 bg-swiss-blue print:bg-black"></div>
                  <h3 className="font-mono text-sm font-bold text-swiss-black uppercase tracking-widest">Logic Graph</h3>
              </div>
              <NetworkGraph 
@@ -610,22 +611,8 @@ function App() {
                 interventions={state.interventions}
                 causeWeights={causeResults.weights}
                 interventionWeights={interventionScoreMap}
-                className="h-[600px]"
+                className="h-[600px] print:h-[500px] print:border-black print:shadow-none"
              />
-        </div>
-
-        {/* Signature Block for Print */}
-        <div className="hidden print-only pt-24 mt-12 border-t-2 border-black">
-            <div className="grid grid-cols-2 gap-24">
-                <div>
-                    <div className="h-px bg-black w-full mb-4"></div>
-                    <div className="text-[10px] font-mono uppercase font-bold">Approved By</div>
-                </div>
-                <div>
-                    <div className="h-px bg-black w-full mb-4"></div>
-                    <div className="text-[10px] font-mono uppercase font-bold">Date</div>
-                </div>
-            </div>
         </div>
         
         <div className="flex justify-center pb-12 pt-12 no-print">
@@ -647,6 +634,17 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white text-swiss-black font-sans flex flex-col relative">
+      
+      {/* Global Print Header - Repeats on every page due to fixed positioning */}
+      <div className="hidden print:flex fixed top-0 left-0 w-full justify-between items-center border-b border-black pb-2 bg-white z-50">
+        <div className="text-[8px] font-mono uppercase">
+            Generated with: <span className="font-bold">Priority Engine</span> // <a href="https://github.com/gbrlpzz/OCI-AHP_Priority_Engine" className="underline decoration-1">github.com/gbrlpzz/OCI-AHP_Priority_Engine</a>
+        </div>
+        <div className="text-[8px] font-mono uppercase text-gray-500">
+            Copyright &copy; 2025 Gabriele Pizzi / Opera Incerta. All rights reserved.
+        </div>
+      </div>
+
       <header className="border-b-2 border-swiss-black bg-white sticky top-0 z-50 shadow-sm no-print" role="banner">
         <div className="max-w-[1600px] mx-auto px-6 md:px-12 h-24 flex justify-between items-center">
           <div className="flex items-center gap-3 select-none cursor-pointer group" onClick={() => setView('TOOL')}>

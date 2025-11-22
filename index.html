@@ -102,15 +102,18 @@
       /* Print Styles */
       @media print {
         @page { margin: 1cm; size: portrait; }
+        /* Important: Hide normal UI elements */
         header, footer, .no-print, button[type="button"]:not(.print-visible) {
             display: none !important;
         }
         .print-only {
             display: block !important;
         }
+        /* Add padding to body so fixed header doesn't overlap content */
         body {
             background: white !important;
             font-size: 12px;
+            padding-top: 40px; 
         }
         .shadow-sharp, .shadow-hover {
             box-shadow: none !important;
